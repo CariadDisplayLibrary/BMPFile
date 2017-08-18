@@ -1,0 +1,3 @@
+BMPFile.cpp libraries/DisplayCore/BMPFile
+BMPFile.h libraries/DisplayCore/BMPFile
+examples/ libraries/DisplayCore/BMPFile

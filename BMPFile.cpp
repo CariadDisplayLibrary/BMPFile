@@ -95,9 +95,9 @@ void BMPFile::drawIdx(DisplayCore *dev, int x, int y, int32_t trans) {
     if (trans < 0) {
         dev->openWindow(x, y, getWidth(), getHeight());
     }
-    for (int32_t iy = 0; iy < getHeight(); iy++) {
+    for (int iy = 0; iy < getHeight(); iy++) {
         getScanLine(iy, data);
-        for (uint32_t ix = 0; ix < getWidth(); ix++) {
+        for (int ix = 0; ix < getWidth(); ix++) {
             struct BitmapPixel32 *p = &_palette[data[ix]];
             color_t col = rgb(p->g, p->b, p->a);
             if (trans < 0) {
@@ -119,16 +119,16 @@ void BMPFile::draw565(DisplayCore *dev, int x, int y, int32_t trans) {
     if (trans < 0) {
         dev->openWindow(x, y, getWidth(), getHeight());
     }
-    for (int32_t iy = 0; iy < getHeight(); iy++) {
+    for (int iy = 0; iy < getHeight(); iy++) {
         getScanLine(iy, data);
-        for (uint32_t ix = 0; ix < getWidth(); ix++) {
+        for (int ix = 0; ix < getWidth(); ix++) {
             uint32_t offset = ix * 2;
-            color_t *p = (color_t *)(data + offset);
+            color_t p = (data[offset] << 8) | data[offset+1];
             if (trans < 0) {
-                dev->windowData(*p);
+                dev->windowData(p);
             } else {
-                if (*p != trans) {
-                    dev->setPixel(x + ix, y + iy, *p);
+                if (p != trans) {
+                    dev->setPixel(x + ix, y + iy, p);
                 }
             }
         }
@@ -143,9 +143,9 @@ void BMPFile::drawRGB(DisplayCore *dev, int x, int y, int32_t trans) {
     if (trans < 0) {
         dev->openWindow(x, y, getWidth(), getHeight());
     }
-    for (int32_t iy = 0; iy < getHeight(); iy++) {
+    for (int iy = 0; iy < getHeight(); iy++) {
         getScanLine(iy, data);
-        for (uint32_t ix = 0; ix < getWidth(); ix++) {
+        for (int ix = 0; ix < getWidth(); ix++) {
             uint32_t offset = ix * 3;
             struct BitmapPixel24 *p = (struct BitmapPixel24 *)(data + offset);
             color_t col = rgb(p->r, p->g, p->b);
@@ -204,9 +204,9 @@ void BMPFile::drawRGBA(DisplayCore *dev, int x, int y, int32_t trans) {
         }
     }
     
-    for (int32_t iy = 0; iy < getHeight(); iy++) {
+    for (int iy = 0; iy < getHeight(); iy++) {
         getScanLine(iy, data);
-        for (uint32_t ix = 0; ix < getWidth(); ix++) {
+        for (int ix = 0; ix < getWidth(); ix++) {
             uint32_t offset = ix * 4;
             uint32_t red, green, blue, alpha;
             struct BitmapPixel32 *p = (struct BitmapPixel32 *)(data + offset);
@@ -252,8 +252,8 @@ void BMPFile::draw(DisplayCore *dev, int x, int y) {
 
     // Unable to decode the image - use colour fuzz instead.
     dev->openWindow(x, y, getWidth(), getHeight());
-    for (uint32_t iy = 0; iy < getHeight(); iy++) {
-        for (uint32_t ix = 0; ix < getWidth(); ix++) {
+    for (int iy = 0; iy < getHeight(); iy++) {
+        for (int ix = 0; ix < getWidth(); ix++) {
             dev->windowData(rand());
         }
     }
@@ -279,16 +279,16 @@ void BMPFile::draw(DisplayCore *dev, int x, int y, color_t trans) {
 
     // Unable to decode the image - use colour fuzz instead.
     dev->openWindow(x, y, getWidth(), getHeight());
-    for (uint32_t iy = 0; iy < getHeight(); iy++) {
-        for (uint32_t ix = 0; ix < getWidth(); ix++) {
+    for (int iy = 0; iy < getHeight(); iy++) {
+        for (int ix = 0; ix < getWidth(); ix++) {
             dev->windowData(rand());
         }
     }
     dev->closeWindow();
 }
 
-void BMPFile::drawTransformed(DisplayCore *dev, int x, int y, int transform) {}
-void BMPFile::drawTransformed(DisplayCore *dev, int x, int y, int transform, color_t t) {}
+void BMPFile::drawTransformed(DisplayCore __attribute__((unused)) *dev, int __attribute__((unused)) x, int __attribute__((unused)) y, int __attribute__((unused)) transform) {}
+void BMPFile::drawTransformed(DisplayCore __attribute__((unused)) *dev, int __attribute__((unused)) x, int __attribute__((unused)) y, int __attribute__((unused)) transform, color_t __attribute__((unused)) t) {}
 
 int BMPFile::getWidth() {
     if (_width == 0) {

@@ -12,7 +12,7 @@ XBSC-Group: DisplayCore
 XBSC-Subgroup: Image
 Depends: libdisplaycore-core, libsd-chipkit
 Provides: BMPFile.h
-Description: BMPFile library
+Description: BMPFile
  Load and display BMP files from SD card
 
 

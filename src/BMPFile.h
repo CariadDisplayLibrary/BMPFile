@@ -32,7 +32,7 @@
 #define _BMPFILE_H
 
 #include <DSPI.h>
-#include <DisplayCore.h>
+#include <Cariad.h>
 #include <SD.h>
 #include <BMP.h>
 
@@ -94,17 +94,17 @@ class BMPFile : public Image {
 
     private:
         void getScanLine(int, uint8_t*);
-        void drawIdx(DisplayCore *dev, int x, int y, int32_t trans);
-        void draw565(DisplayCore *dev, int x, int y, int32_t trans);
-        void drawRGB(DisplayCore *dev, int x, int y, int32_t trans);
-        void drawRGBA(DisplayCore *dev, int x, int y, int32_t trans);
+        void drawIdx(Cariad *dev, int x, int y, int32_t trans);
+        void draw565(Cariad *dev, int x, int y, int32_t trans);
+        void drawRGB(Cariad *dev, int x, int y, int32_t trans);
+        void drawRGBA(Cariad *dev, int x, int y, int32_t trans);
 
     public:
         BMPFile(File &file) : _file(&file) { _width = 0; _height = 0; };
-        void draw(DisplayCore *dev, int x, int y);
-        void draw(DisplayCore *dev, int x, int y, color_t t);
-        void drawTransformed(DisplayCore *dev, int x, int y, int transform);
-        void drawTransformed(DisplayCore *dev, int x, int y, int transform, color_t t);
+        void draw(Cariad *dev, int x, int y);
+        void draw(Cariad *dev, int x, int y, color_t t);
+        void drawTransformed(Cariad *dev, int x, int y, int transform);
+        void drawTransformed(Cariad *dev, int x, int y, int transform, color_t t);
 
         virtual int getWidth();
         virtual int getHeight();

@@ -1,0 +1,3 @@
+src libraries/Cariad/BMPFile
+library.properties libraries/Cariad/BMPFile
+examples libraries/Cariad/BMPFile

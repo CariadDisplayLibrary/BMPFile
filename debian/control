@@ -1,16 +1,17 @@
-Source: libdisplaycore-image-bmpfile
+Source: libcariad-image-bmpfile
 Section: main
 Priority: extra
 Maintainer: Matt Jenkins <matt@majenko.co.uk>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.4
 
-Package: libdisplaycore-image-bmpfile
+Package: libcariad-image-bmpfile
+Replaces: libdisplaycore-image-bmpfile
 Section: main
 Architecture: all
-XBSC-Group: DisplayCore
+XBSC-Group: Cariad
 XBSC-Subgroup: Image
-Depends: libdisplaycore-core, libsd-chipkit
+Depends: libcariad-core, libsd-chipkit
 Provides: BMPFile.h
 Description: BMPFile
  Load and display BMP files from SD card

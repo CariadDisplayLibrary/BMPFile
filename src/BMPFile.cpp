@@ -90,7 +90,7 @@ void BMPFile::getScanLine(int line, uint8_t *data) {
     _spos += _chunkSize;
 }
 
-void BMPFile::drawIdx(DisplayCore *dev, int x, int y, int32_t trans) {
+void BMPFile::drawIdx(Cariad *dev, int x, int y, int32_t trans) {
     uint8_t data[_chunkSize];
     if (trans < 0) {
         dev->openWindow(x, y, getWidth(), getHeight());
@@ -114,7 +114,7 @@ void BMPFile::drawIdx(DisplayCore *dev, int x, int y, int32_t trans) {
     }
 }
 
-void BMPFile::draw565(DisplayCore *dev, int x, int y, int32_t trans) {
+void BMPFile::draw565(Cariad *dev, int x, int y, int32_t trans) {
     uint8_t data[_chunkSize];
     if (trans < 0) {
         dev->openWindow(x, y, getWidth(), getHeight());
@@ -138,7 +138,7 @@ void BMPFile::draw565(DisplayCore *dev, int x, int y, int32_t trans) {
     }
 }
 
-void BMPFile::drawRGB(DisplayCore *dev, int x, int y, int32_t trans) {
+void BMPFile::drawRGB(Cariad *dev, int x, int y, int32_t trans) {
     uint8_t data[_chunkSize];
     if (trans < 0) {
         dev->openWindow(x, y, getWidth(), getHeight());
@@ -163,7 +163,7 @@ void BMPFile::drawRGB(DisplayCore *dev, int x, int y, int32_t trans) {
     }
 }
 
-void BMPFile::drawRGBA(DisplayCore *dev, int x, int y, int32_t trans) {
+void BMPFile::drawRGBA(Cariad *dev, int x, int y, int32_t trans) {
     uint8_t data[_chunkSize];
     int rShift = 0;
     int gShift = 8;
@@ -233,7 +233,7 @@ void BMPFile::drawRGBA(DisplayCore *dev, int x, int y, int32_t trans) {
 
 
 
-void BMPFile::draw(DisplayCore *dev, int x, int y) {
+void BMPFile::draw(Cariad *dev, int x, int y) {
     loadImageHeader();
     switch (_info.biBitCount) {
         case 8:
@@ -260,7 +260,7 @@ void BMPFile::draw(DisplayCore *dev, int x, int y) {
     dev->closeWindow();
 }
 
-void BMPFile::draw(DisplayCore *dev, int x, int y, color_t trans) {
+void BMPFile::draw(Cariad *dev, int x, int y, color_t trans) {
     loadImageHeader();
     switch (_info.biBitCount) {
         case 8:
@@ -287,8 +287,8 @@ void BMPFile::draw(DisplayCore *dev, int x, int y, color_t trans) {
     dev->closeWindow();
 }
 
-void BMPFile::drawTransformed(DisplayCore __attribute__((unused)) *dev, int __attribute__((unused)) x, int __attribute__((unused)) y, int __attribute__((unused)) transform) {}
-void BMPFile::drawTransformed(DisplayCore __attribute__((unused)) *dev, int __attribute__((unused)) x, int __attribute__((unused)) y, int __attribute__((unused)) transform, color_t __attribute__((unused)) t) {}
+void BMPFile::drawTransformed(Cariad __attribute__((unused)) *dev, int __attribute__((unused)) x, int __attribute__((unused)) y, int __attribute__((unused)) transform) {}
+void BMPFile::drawTransformed(Cariad __attribute__((unused)) *dev, int __attribute__((unused)) x, int __attribute__((unused)) y, int __attribute__((unused)) transform, color_t __attribute__((unused)) t) {}
 
 int BMPFile::getWidth() {
     if (_width == 0) {
